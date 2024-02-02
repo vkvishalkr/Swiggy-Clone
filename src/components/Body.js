@@ -1,9 +1,8 @@
 import RestaurantCard from "./Restaurantcard";
-import resList from "../utils/mockData";
 import { useEffect, useState } from "react";
 
 const Body = () => {
-  const [listOfRestaurant, setListOfRestaurant] = useState(resList);
+  const [listOfRestaurant, setListOfRestaurant] = useState([]);
 
   useEffect(() => {
     fetchData();
@@ -15,8 +14,9 @@ const Body = () => {
     );
 
     const json = await data.json();
-    console.log(json);
-    // setListOfRestaurant(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
+    // console.log(json);
+    // console.log(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
+    setListOfRestaurant(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
   };
 
   return (
@@ -26,7 +26,7 @@ const Body = () => {
           className="filter-btn"
           onClick={() => {
             const filteredList = listOfRestaurant.filter(
-              (res) => res.data.avgRating > 4
+              (res) => res.info.avgRating > 4
             );
             setListOfRestaurant(filteredList);
           }}
@@ -36,11 +36,12 @@ const Body = () => {
       </div>
       <div className="res-container">
         {listOfRestaurant.map((restaurant) => (
-          <RestaurantCard key={restaurant.data.id} resData={restaurant} />
+          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
         ))}
       </div>
     </div>
   );
 };
+
 
 export default Body;
