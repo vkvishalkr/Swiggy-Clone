@@ -1,5 +1,6 @@
-import RestaurantCard from "./Restaurantcard";
+import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
+import Shimmer from "./Shimmer";
 
 const Body = () => {
   const [listOfRestaurant, setListOfRestaurant] = useState([]);
@@ -16,10 +17,14 @@ const Body = () => {
     const json = await data.json();
     // console.log(json);
     // console.log(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
-    setListOfRestaurant(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setListOfRestaurant(
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
   };
 
-  return (
+  return listOfRestaurant.length === 0 ? (
+    <Shimmer />
+  ) : (
     <div className="body">
       <div className="filter">
         <button
@@ -42,6 +47,5 @@ const Body = () => {
     </div>
   );
 };
-
 
 export default Body;
