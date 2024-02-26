@@ -35,15 +35,30 @@ const Body = () => {
         <div className="search">
           <input
             type="text"
+            name="search-box"
+            placeholder="Search your restaurant"
             className="serch-box"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
+              if (e.target.value.trim() === "") {
+                setFilteredRestaurant(listOfRestaurant);
+                return;
+              }
+              const filteredList = listOfRestaurant.filter((res) =>
+                res.info.name
+                  .toLowerCase()
+                  .includes(e.target.value.toLowerCase())
+              );
+              setFilteredRestaurant(filteredList);
             }}
           />
-          <button
+            
+          {/* <button
             onClick={() => {
               //filter the restaurant
+              debugger;
+
               const filteredList = listOfRestaurant.filter((res) =>
                 res.info.name.toLowerCase().includes(searchText.toLowerCase())
               );
@@ -53,7 +68,7 @@ const Body = () => {
             }}
           >
             Search
-          </button>
+          </button> */}
         </div>
         <button
           className="filter-btn"
