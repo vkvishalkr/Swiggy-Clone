@@ -18,8 +18,6 @@ const Body = () => {
     );
 
     const json = await data.json();
-    // console.log(json);
-    // console.log(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
     setListOfRestaurant(
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
@@ -55,21 +53,7 @@ const Body = () => {
             }}
           />
 
-          {/* <button
-            onClick={() => {
-              //filter the restaurant
-              debugger;
-
-              const filteredList = listOfRestaurant.filter((res) =>
-                res.info.name.toLowerCase().includes(searchText.toLowerCase())
-              );
-              setFilteredRestaurant(filteredList);
-
-              console.log(searchText);
-            }}
-          >
-            Search
-          </button> */}
+        
         </div>
         <button
           className="filter-btn"
